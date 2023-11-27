@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from django.templatetags.static import static
@@ -159,3 +159,11 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = 'about.html'
     
+
+class StoryListView(ListView):
+    model = Story
+    template_name = 'view_list.html'
+    context_object_name = 'stories'
+
+    
+

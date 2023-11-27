@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Flask</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Horizontally center content */
+            align-items: center; /* Vertically center content */
+            height: 100vh; /* Make the body fill the viewport height */
+        }
+        .form {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px grey;
+            padding: 20px;
+            width: 50%; /* Adjust the width as needed */
+        }
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 0;
+            padding: 10px;
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            border-radius: 3px;
+            border-style: none none solid none;
+            border-width: 1px;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            border-radius: 3px;
+            border-style: none none solid none;
+            border-width: 1px;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+        .text_area {
+            flex: 1; /* Take up available space */
+            padding: 20px;
+        }
+        textarea {
+            resize: vertical;
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+ <div class="form">
+    <form method="POST" action="{{ url_for('read_file', story_id=story.id) }}">
+        <input type="hidden" id="id-field" name="id-field" value="{{ story.id }}" readonly>
+        <label for="text-field">Story Name</label>
+        <input type="text" id="text-field" name="text-field" value="{{ story.story_name }}" readonly>
+
+        <button type="submit" class="btn btn-outline-dark" name="read_content">Read Content</button>
+        <button type="submit" class="btn btn-outline-dark" name="pause_content">Pause Content</button>
+        <button type="submit" class="btn btn-outline-dark" name="resume_content">Resume Content</button>
+        <button type="submit" class="btn btn-outline-dark" name="stop_content">Stop Content</button>
+    </form>
+</div>
+
+<div class="text_area">
+    <textarea rows="20" style="resize: vertical;">{{ story.content }}</textarea>
+</div>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+</html>
