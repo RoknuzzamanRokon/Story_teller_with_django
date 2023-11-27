@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Flask</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            /* Use flexbox for layout */
+            justify-content: center;
+            /* Horizontally center content */
+            align-items: center;
+            /* Vertically center content */
+            height: 100vh;
+            /* Make the body fill the viewport height */
+        }
+
+        .form {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px grey;
+            padding: 20px;
+            width: 50%;
+            /* Adjust the width as needed */
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            border-radius: 3px;
+            border-style: none none solid none;
+            border-width: 1px;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            border-radius: 3px;
+            border-style: none none solid none;
+            border-width: 1px;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .text_area {
+            flex: 1;
+            /* Take up available space */
+            padding: 20px;
+        }
+
+        textarea {
+            resize: vertical;
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form">
+        <h1>This is Voice generator test page and download it.</h1>
+
+        <form id="story_form_{{ story.id }}" method="POST" action="{{ url_for('voiceTest_and_download', story_id=story.id) }}">
+            <label for="choice_voice" class="form-label">Choice Voice</label>
+            <select class="form-control" name="choice_voice">
+                <option value="Adam">Adam</option>
+                <option value="Antoni">Antoni</option>
+                <option value="Bella">Bella</option>
+                <option value="Callum">Callum</option>
+                <option value="Charlie">Charlie</option>
+                <option value="Daniel">Daniel</option>
+            </select>
+
+           <div class="form-check">
+            <input class="form-check-input" type="radio" name="choice_model" id="eleven_monolingual_v1" value="eleven_monolingual_v1" checked>
+            <label class="form-check-label" for="eleven_monolingual_v1">
+                eleven_monolingual_v1
+            </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="choice_model" id="eleven_multilingual_v1" value="eleven_multilingual_v1">
+                <label class="form-check-label" for="eleven_multilingual_v1">
+                    eleven_multilingual_v1
+                </label>
+            </div>
+            <button type="submit" class="btn btn-outline-danger" name="listen_voice">Test voice</button>
+            <button type="submit" class="btn btn-outline-danger" name="download_mp3">Download mp3</button>
+
+        </form>
+
+
+
+        <div class="text_area">
+            <textarea rows="20" style="resize: vertical;">{{ story.content }}</textarea>
+        </div>
+    </div>
+
+</body>
+
+</html>

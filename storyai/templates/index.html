@@ -1,0 +1,189 @@
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Story Writter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            display: flex;
+            /* Use flexbox for layout */
+            justify-content: center;
+            /* Horizontally center content */
+            align-items: center;
+            /* Vertically center content */
+            height: 100vh;
+            /* Make the body fill the viewport height */
+        }
+
+        .form {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px grey;
+            padding: 10px;
+            /* width: 50%; */
+            /* Adjust the width as needed */
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            margin-top: 0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* input[type="text"], input[type="password"] {
+            border-radius: 3px;
+            border-style: none none solid none;
+            border-width: 1px;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+        } */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            border-radius: 3px;
+            border-style: none none solid none;
+            border-width: 1px;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .text_area {
+            flex: 1;
+            padding: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card" style="box-shadow: 0px 0px 10px grey;">
+                    <div class="text_area">
+                        <textarea id="result-container" rows="14" style="resize: vertical;" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <form method="POST" action="{% url 'generate_story' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="text-field" class="form-label">Story Ideas *</label>
+                                    <textarea type="text" class="form-control" id="text-field"
+                                        name="text-field"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="age-field" class="form-label">Your age *</label>
+                                            <input type="text" class="form-control" id="age-field" name="age-field">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="chapter-field" class="form-label">Chapter *</label>
+                                            <input type="text" class="form-control" id="chapter-field"
+                                                name="chapter-field">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="language-field" class="form-label">Language *</label>
+                                            <select class="form-control" id="language-field" name="language-field">
+                                                <option value="English">English</option>
+                                                <option value="Germany">German</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="language-field" class="form-label">Category</label>
+                                            <select class="form-control">
+                                                <option value="Fiction">Fiction</option>
+                                                <option value="NON-Fiction">Non-Fiction</option>
+                                                <option value="Educational">Educational</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" style="float: right;" class="btn btn-outline-success"
+                                    name="search_btn">Generate
+                                    Story</button>
+
+                            </form>
+
+
+                            <div class="mb-3">
+                                <form method="GET" action="/view_list">
+                                    <button type="submit" style="float: left;" class="btn btn-outline-dark"
+                                        name="View_list">View List</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        const resultContainer = document.getElementById('result-container');
+
+        // Connect to the Socket.IO server
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // Listen for 'update_gpt_result' event from the server
+        socket.on('update_gpt_result', function (data) {
+            // Display the received gpt_result in the resultContainer
+            resultContainer.innerHTML += data.chapter + data.result + '\n\n\n';
+        });
+    </script> {% endcomment %}
+
+
+
+</body>
+
+</html>
+{% endblock content %}
