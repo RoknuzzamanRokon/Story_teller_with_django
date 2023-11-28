@@ -18,7 +18,7 @@ import os
 
 
 chapter_str = ''
-EXPECTATION_WORDS = '700'
+EXPECTATION_WORDS = '1000'
 
 openai.api_key=settings.OPENAI_SECRET_KEY
 api_url = 'https://api.openai.com/v1/chat/completions'
@@ -78,13 +78,13 @@ class GenerateStoryView(TemplateView):
                         print(chapter_explanations)
                         for i in range(1, len(dictionary) + 1):
                             per_chapter = dictionary[i]
-                            print(per_chapter)
+                            # print(per_chapter)
 
                             chapter_explanations.append(f"Chapter-{i}-{per_chapter} \n")
 
                             language_field_2 = f"Write it in {language} language"
                             result = per_chapter + f" Explain it in {EXPECTATION_WORDS} words. {language_field_2}"
-                            print(result)
+                            # print(result)
 
                             payload_2 = {
                                 "model": "gpt-4",
@@ -106,7 +106,7 @@ class GenerateStoryView(TemplateView):
                             data_2 = json.loads(response_2.content)
 
                             gpt_result = data_2['choices'][0]['message']['content']
-                            print(gpt_result)
+                            print(f"Chapter-{i}---> complete. ✔✔")
 
                             chapter_explanations.append(f"{gpt_result}\n\n\n")
 
@@ -145,7 +145,7 @@ class GenerateStoryView(TemplateView):
                 # Clear the session variable after saving
                 request.session['chapter_str'] = ''
 
-                return render(request, 'success.html', context={'story': story})
+                return render(request, 'voiceTest_and_download.html', context={'story': story})
             else:
                 print("Chapter_str is empty. Cannot save.")
                 print("Check the 'search_btn' block.")
@@ -154,6 +154,8 @@ class GenerateStoryView(TemplateView):
         return render(request, self.template_name,
                       context={'result': chapter_str, 'user_question': user_question, 'age': age, 'language': language})
     
+
+
 
 
 class HomePageView(TemplateView):
