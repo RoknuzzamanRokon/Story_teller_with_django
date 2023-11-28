@@ -41,17 +41,21 @@
 
                 <td>{{ story.content|slice:"10:150" }}</td>
 
-                {% comment %} <td>
-                <form method="POST" action="{% url 'update_file' story.id %}">
+                <td>
+                <form method="POST" action="{% url 'update_file' story.pk %}">
+                  {% csrf_token %}
                   <button type="submit" class="btn btn-outline-dark" name="update_file">Update File</button>
                 </form>
                 </td>
-                <td>
-                  <form method="GET" action="{% url 'view_test_file' story.id %}">
+
+                {% comment %} <td>
+                  <form method="GET" action="{% url 'view_test_file' story.pk %}">
                     <button type="submit" class="btn btn-outline-dark" name="view_test_file">View</button>
                   </form>
-                </td>
-                <td>
+                </td> {% endcomment %}
+
+
+                {% comment %} <td>
                   <form method="POST" action="{% url 'delete_file' story.id %}">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-outline-danger" name="delete_file">Delete File</button>

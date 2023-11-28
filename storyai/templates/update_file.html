@@ -14,13 +14,21 @@
 
 <body>
 
-    <div class="col">
-        <form method="POST" action="{{ url_for('update_story_name', story_id=story.id) }}">
-            <label for="update-story-field">Update Story name</label>
-            <input type="text" id="update-story-field" name="update-story-field" value="{{ story.story_name }}">
-            <button type="submit" class="btn btn-outline-dark" name="update_file">Update File</button>
-        </form>
-    </div>
+    {% block content %}
+    <h1>Edit post</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div>
+                {{ field.label }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Update" />
+    </form>
+    {% endblock content %}
+
 
 </body>
 

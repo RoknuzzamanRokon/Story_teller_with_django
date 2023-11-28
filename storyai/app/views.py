@@ -1,12 +1,15 @@
 from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import UpdateView
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from django.templatetags.static import static
 from django.contrib.sessions.models import Session
+from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from django.views import View
+from django import forms
 import json
 import requests
 import openai
@@ -165,5 +168,23 @@ class StoryListView(ListView):
     template_name = 'view_list.html'
     context_object_name = 'stories'
 
-    
+    def get_queryset(self):
+        return super().get_queryset()
 
+
+class StoryCURDForm(forms.ModelForm):
+    class Meta:
+        model = Story
+        fields = ['story_name']
+
+class StoryUpdateView(UpdateView):
+    model = Story
+    template_name = 'update_file.html'
+    form_class = StoryCURDForm
+    success_url = reverse_lazy('view_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        story = self.get_object()
+        context['form'].initial['story_name'] = story.story_name
+        return context
