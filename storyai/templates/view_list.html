@@ -48,11 +48,9 @@
                 </form>
                 </td>
 
-                {% comment %} <td>
-                  <form method="GET" action="{% url 'view_test_file' story.pk %}">
-                    <button type="submit" class="btn btn-outline-dark" name="view_test_file">View</button>
-                  </form>
-                </td> {% endcomment %}
+                <td>
+                  <a href="{% url 'view_test_file' story_id=story.id %}" class="btn btn-outline-dark">View</a>
+              </td>
 
 
                 {% comment %} <td>

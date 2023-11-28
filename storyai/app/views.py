@@ -177,6 +177,22 @@ class StoryCURDForm(forms.ModelForm):
         model = Story
         fields = ['story_name']
 
+
+class ViewTestFileView(View):
+    template_name_with_mp3 = 'read_content_file.html'
+    template_name_without_mp3 = 'voiceTest_and_download.html'
+
+    def get(self, request, story_id, *args, **kwargs):
+        story = get_object_or_404(Story, pk=story_id)
+        file_path = os.path.join("Mp3", f"{story.story_name}_{story.id}.mp3")
+
+        if os.path.exists(file_path):
+            template_name = self.template_name_with_mp3
+        else:
+            template_name = self.template_name_without_mp3
+
+        return render(request, template_name, {'story': story})
+        
 class StoryUpdateView(UpdateView):
     model = Story
     template_name = 'update_file.html'

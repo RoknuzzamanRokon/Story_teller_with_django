@@ -87,7 +87,8 @@
     <div class="form">
         <h1>This is Voice generator test page and download it.</h1>
 
-        <form id="story_form_{{ story.id }}" method="POST" action="{{ url_for('voiceTest_and_download', story_id=story.id) }}">
+        <form method="POST" action="{% url 'view_test_file' story.id %}">
+            {% csrf_token %}
             <label for="choice_voice" class="form-label">Choice Voice</label>
             <select class="form-control" name="choice_voice">
                 <option value="Adam">Adam</option>

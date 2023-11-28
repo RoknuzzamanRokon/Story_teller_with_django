@@ -69,7 +69,7 @@
 </head>
 <body>
  <div class="form">
-    <form method="POST" action="{{ url_for('read_file', story_id=story.id) }}">
+    <form method="POST" action="{% url 'view_test_file' story.id %}">
         <input type="hidden" id="id-field" name="id-field" value="{{ story.id }}" readonly>
         <label for="text-field">Story Name</label>
         <input type="text" id="text-field" name="text-field" value="{{ story.story_name }}" readonly>
