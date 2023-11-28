@@ -6,7 +6,7 @@ from django.templatetags.static import static
 from django.contrib.sessions.models import Session
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from django.views import View
 from django import forms
@@ -204,3 +204,20 @@ class StoryUpdateView(UpdateView):
         story = self.get_object()
         context['form'].initial['story_name'] = story.story_name
         return context
+    
+
+class DeleteFileView(View):
+    template_name = 'delete_file.html'
+
+    def get(self, request, story_id, *args, **kwargs):
+        story = get_object_or_404(Story, pk=story_id)
+        return render(request, self.template_name, {'story': story})
+
+    def post(self, request, story_id, *args, **kwargs):
+        file_delete = get_object_or_404(Story, pk=story_id)
+        try:
+            file_delete.delete()
+            return redirect('view_list')
+        except Exception as e:
+            return render(request, self.template_name, {'error': str(e)})
+        

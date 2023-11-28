@@ -51,15 +51,13 @@
                 <td>
                   <a href="{% url 'view_test_file' story_id=story.id %}" class="btn btn-outline-dark">View</a>
               </td>
-
-
-                {% comment %} <td>
-                  <form method="POST" action="{% url 'delete_file' story.id %}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-outline-danger" name="delete_file">Delete File</button>
+                
+                <td>
+                  <form method="POST" action="{% url 'delete_file' story.pk %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-outline-danger" name="delete_file">Delete File</button>
                   </form>
-                </td> {% endcomment %}
-
+              </td>
 
               </tr>
               {% endfor %}
