@@ -65,10 +65,10 @@ WSGI_APPLICATION = 'storyai.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'story_ai_db',
+        'NAME': 'aistory',
         'USER': 'root',
-        'PASSWORD': '12345',
-        'HOST':'localhost',
+        'PASSWORD': 'Ppaassword@12345#',
+        'HOST':'147.139.28.155',
         'PORT':'3306',
         }
     }
