@@ -18,7 +18,7 @@ import os
 
 
 chapter_str = ''
-EXPECTATION_WORDS = '1000'
+EXPECTATION_WORDS = '799'
 
 openai.api_key=settings.OPENAI_SECRET_KEY
 api_url = 'https://api.openai.com/v1/chat/completions'
